@@ -10,13 +10,13 @@ namespace Tips_Calculator.DDBB
 {
     public class Operaciones
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private const string insertarRates = "`tips_calculator`.`InsertarRates`";
-        private const string obtenerRates = "`tips_calculator`.`ObtenerRates`";
-        private const string eliminarRates = "`tips_calculator`.`EliminarRates`";
-        private const string insertarPedidos = "`tips_calculator`.`InsertarTransactions`";
-        private const string obtenerPedidos = "`tips_calculator`.`ObtenerTransactions`";
-        private const string eliminarPedidos = "`tips_calculator`.`EliminarTransactions`";
+        private static readonly log4net.ILog _Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private const string _InsertarRates = "`tips_calculator`.`InsertarRates`";
+        private const string _ObtenerRates = "`tips_calculator`.`ObtenerRates`";
+        private const string _EliminarRates = "`tips_calculator`.`EliminarRates`";
+        private const string _InsertarPedidos = "`tips_calculator`.`InsertarTransactions`";
+        private const string _ObtenerPedidos = "`tips_calculator`.`ObtenerTransactions`";
+        private const string _EliminarPedidos = "`tips_calculator`.`EliminarTransactions`";
 
         public static void InsertarRates(List<Rates> rates)
         {
@@ -26,7 +26,7 @@ namespace Tips_Calculator.DDBB
                 MySqlTransaction transaction = conn.BeginTransaction(System.Data.IsolationLevel.Serializable);
                 try
                 {
-                    using (MySqlCommand cmd = new MySqlCommand(eliminarRates, conn))
+                    using (MySqlCommand cmd = new MySqlCommand(_EliminarRates, conn))
                     {
                         cmd.Transaction = transaction;
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -35,7 +35,7 @@ namespace Tips_Calculator.DDBB
 
                     foreach (Rates rate in rates)
                     {
-                        using (MySqlCommand cmd = new MySqlCommand(insertarRates, conn))
+                        using (MySqlCommand cmd = new MySqlCommand(_InsertarRates, conn))
                         {
                             cmd.Transaction = transaction;
                             cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -50,8 +50,8 @@ namespace Tips_Calculator.DDBB
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex.Message);
-                    log.Warn("Procedemos al rollback de los datos");
+                    _Log.Error(ex.Message);
+                    _Log.Warn("Procedemos al rollback de los datos");
                     transaction.Rollback();
                 }
             }
@@ -65,7 +65,7 @@ namespace Tips_Calculator.DDBB
                 MySqlTransaction transaction = conn.BeginTransaction(System.Data.IsolationLevel.Serializable);
                 try
                 {
-                    using (MySqlCommand cmd = new MySqlCommand(eliminarPedidos, conn))
+                    using (MySqlCommand cmd = new MySqlCommand(_EliminarPedidos, conn))
                     {
                         cmd.Transaction = transaction;
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -74,7 +74,7 @@ namespace Tips_Calculator.DDBB
 
                     foreach (Pedidos pedido in pedidos)
                     {
-                        using (MySqlCommand cmd = new MySqlCommand(insertarPedidos, conn))
+                        using (MySqlCommand cmd = new MySqlCommand(_InsertarPedidos, conn))
                         {
                             cmd.Transaction = transaction;
                             cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -89,8 +89,8 @@ namespace Tips_Calculator.DDBB
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex.Message);
-                    log.Warn("Procedemos al rollback de los datos");
+                    _Log.Error(ex.Message);
+                    _Log.Warn("Procedemos al rollback de los datos");
                     transaction.Rollback();
                 }
             }
@@ -104,7 +104,7 @@ namespace Tips_Calculator.DDBB
                 Conexion.AbrirConexion(conn);
                 try
                 {
-                    using (MySqlCommand cmd = new MySqlCommand(obtenerRates, conn))
+                    using (MySqlCommand cmd = new MySqlCommand(_ObtenerRates, conn))
                     {
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
                         var reader = cmd.ExecuteReader();
@@ -121,8 +121,8 @@ namespace Tips_Calculator.DDBB
                 }
                 catch (Exception ex)
                 {
-                    log.Error(ex.Message);
-                    log.Warn("Error a la hora de recoger los datos de la DDBB");
+                    _Log.Error(ex.Message);
+                    _Log.Warn("Error a la hora de recoger los datos de la DDBB");
                 }
             }
             return rates;
@@ -136,7 +136,7 @@ namespace Tips_Calculator.DDBB
                 Conexion.AbrirConexion(conn);
                 try
                 {
-                    using (MySqlCommand cmd = new MySqlCommand(obtenerPedidos, conn))
+                    using (MySqlCommand cmd = new MySqlCommand(_ObtenerPedidos, conn))
                     {
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
                         var reader = cmd.ExecuteReader();
@@ -154,8 +154,8 @@ namespace Tips_Calculator.DDBB
 
                 catch (Exception ex)
                 {
-                    log.Error(ex.Message);
-                    log.Warn("Error a la hora de recoger los datos de la DDBB");
+                    _Log.Error(ex.Message);
+                    _Log.Warn("Error a la hora de recoger los datos de la DDBB");
                 }
             }
             return pedidos;
