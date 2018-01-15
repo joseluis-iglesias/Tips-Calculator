@@ -67,7 +67,7 @@ namespace Tips_Calculator.Logic
             }
             return pedidos;
         }
-
+        /* TO DO*/
         public static List<Propinas> CalcularPropinas(string cuenta, string moneda, List<Rates> rates, List<Pedidos> pedidos)
         {
             List<Propinas> propinas = new List<Propinas>();
@@ -80,8 +80,9 @@ namespace Tips_Calculator.Logic
                 decimal amountTotalIg = (from pedido in pedidosIgMon select pedido.Amount).Sum();
                 foreach (var pedido in pedidosDifMon)
                 {
-                    pedido.Amount = CalcularRates(moneda, rates, pedido);
+                    pedido.Amount = RedondearDecimales( pedido.Amount * CalcularRates(moneda, rates, pedido.Currency));
                 }
+                decimal amountTotalDis = (from pedido in pedidosDifMon select pedido.Amount).Sum();
             }
             catch (Exception ex)
             {
@@ -107,21 +108,23 @@ namespace Tips_Calculator.Logic
             return propinas;
         }
 
-        private static decimal CalcularRates(string moneda, List<Rates> rates, Pedidos pedido, decimal? moneda2 = null)
+        private static decimal CalcularRates(string moneda, List<Rates> rates, string pedido)
         {
             decimal tip = 1;
-            var rate = rates.FindAll(x => x.From == pedido.Currency && x.To == moneda);
+            var rate = rates.FindAll(x => x.From == pedido && x.To == moneda);
             if (rate.Count() > 0)
             {
                 foreach (var t in rate)
-                    pedido.Amount = t.Rate * pedido.Amount;
-                return RedondearDecimales(pedido.Amount);
+                    tip = tip* t.Rate;
+                return RedondearDecimales(tip);
             }
             else
             {
-                return CalcularRates(moneda, rates, pedido, );
+                rate = rates.FindAll(x => x.From == pedido);
+                foreach (var rr in rate)
+                    RedondearDecimales(tip * CalcularRates(rr.To, rates, pedido));
+                return tip;
             }
-            return tip;
         }
 
         private static decimal CalcularPropina(decimal amount)
