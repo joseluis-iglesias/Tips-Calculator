@@ -1,0 +1,14 @@
+2018-01-14 22:41:07,004 [9] WARN Tips_Calculator.Service - Error al intentar acceder a la url especificada. Continuamos la operacion recogiendo los datos de nuestro respaldo.
+2018-01-14 22:41:07,594 [9] ERROR Tips_Calculator.Service - Error en el servidor remoto: (404) No se encontró.
+2018-01-14 22:41:11,945 [9] WARN Tips_Calculator.Service - Error al intentar acceder a la url especificada. Continuamos la operacion recogiendo los datos de nuestro respaldo.
+2018-01-14 22:41:14,104 [9] ERROR Tips_Calculator.Service - Error en el servidor remoto: (404) No se encontró.
+2018-01-14 22:41:31,064 [9] ERROR Tips_Calculator.DDBB.Operaciones - Procedure or function '`ObtenerTransactions`' cannot be found in database '`tips_calculator`'.
+2018-01-14 22:41:31,072 [9] WARN Tips_Calculator.DDBB.Operaciones - Error a la hora de recoger los datos de la DDBB
+2018-01-14 22:42:01,701 [9] ERROR Tips_Calculator.DDBB.Operaciones - Procedure or function '`ObtenerTransactions`' cannot be found in database '`tips_calculator`'.
+2018-01-14 22:42:01,702 [9] WARN Tips_Calculator.DDBB.Operaciones - Error a la hora de recoger los datos de la DDBB
+2018-01-14 22:43:17,171 [9] ERROR Tips_Calculator.DDBB.Operaciones - Procedure or function '`ObtenerTransactions`' cannot be found in database '`tips_calculator`'.
+2018-01-14 22:43:17,171 [9] WARN Tips_Calculator.DDBB.Operaciones - Error a la hora de recoger los datos de la DDBB
+2018-01-14 22:43:37,385 [9] WARN Tips_Calculator.Service - Error al intentar acceder a la url especificada. Continuamos la operacion recogiendo los datos de nuestro respaldo.
+2018-01-14 22:43:37,748 [9] ERROR Tips_Calculator.Service - Error en el servidor remoto: (404) No se encontró.
+2018-01-14 22:43:48,193 [9] WARN Tips_Calculator.Service - Error al intentar acceder a la url especificada. Continuamos la operacion recogiendo los datos de nuestro respaldo.
+2018-01-14 22:43:48,720 [9] ERROR Tips_Calculator.Service - Error en el servidor remoto: (404) No se encontró.
