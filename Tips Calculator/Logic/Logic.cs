@@ -70,98 +70,16 @@ namespace Tips_Calculator.Logic
         public static List<Propinas> CalcularPropinas(string cuenta, string moneda, List<Rates> rates, List<Pedidos> pedidos)
         {
             List<Propinas> propinas = new List<Propinas>();
-            Propinas propina = new Propinas();
             try
             {
                 var pedidosSelect = pedidos.FindAll(x => x.Sku == cuenta);
-                foreach (var pedido in pedidosSelect)
+                propinas = ObtenerPropinas(pedidosSelect);
+                var pedidosDifMon = pedidosSelect.FindAll(x => x.Currency != moneda);
+                var pedidosIgMon = pedidosSelect.FindAll(x => x.Currency == moneda);
+                decimal amountTotalIg = (from pedido in pedidosIgMon select pedido.Amount).Sum();
+                foreach (var pedido in pedidosDifMon)
                 {
-                    propina = new Propinas(pedido)
-                    {
-                        Tip = CalcularPropina(pedido.Amount)
-                    };
-                    propinas.Add(propina);
-                    if (pedido.Currency != moneda)
-                    {
-                        var changes = from rate in rates where (rate.From == pedido.Currency ) && (rate.To == moneda) select rate;
-                        if (changes.Count() > 0)
-                        {
-                            foreach (var cambio in changes)
-                            {
-                                propina = new Propinas(pedido)
-                                {
-                                    Currency = moneda,
-                                    Amount = cambio.Rate * pedido.Amount,
-                                    Tip = CalcularPropina(cambio.Rate * pedido.Amount)
-                                };
-                                propinas.Add(propina);
-                            }
-                        }
-                        else
-                        {
-                            changes = from rate in rates where (rate.From == pedido.Currency) select rate;
-                            foreach (var cambio in changes)
-                            {
-                                var cambios = rates.FindAll(x => x.To == moneda && x.From == cambio.To);
-                                if (cambios.Count() > 0)
-                                {
-                                    foreach (var rate in cambios)
-                                    {
-                                        propina = new Propinas(pedido)
-                                        {
-                                            Currency = moneda,
-                                            Amount = rate.Rate * pedido.Amount,
-                                            Tip = CalcularPropina(rate.Rate * pedido.Amount)
-                                        };
-                                        propinas.Add(propina);
-                                    }
-                                }
-                                else
-                                {
-                                    var tip = rates.FindAll(x => x.To == moneda && x.From == cambio.From);
-                                    if (tip.Count > 0)
-                                    {
-                                        foreach (Rates rate in tip)
-                                        {
-                                            if (tip.Count() > 0)
-                                            {
-                                                propina = new Propinas(pedido)
-                                                {
-                                                    Currency = moneda,
-                                                    Amount = rate.Rate * pedido.Amount,
-                                                    Tip = CalcularPropina(rate.Rate * pedido.Amount)
-                                                };
-                                                propinas.Add(propina);
-                                            }
-                                        }
-                                    }
-                                    else
-                                    {
-                                        /*REVISAR MAÑANA*/
-                                       tip = rates.FindAll(x => x.To == cambio.To && x.From == cambio.From);
-                                       var def = tip.FindAll(x => x.To == moneda && x.From == cambio.To);
-                                        if (def.Count() <= 0)
-                                        {
-                                            def = tip.FindAll(x => x.To == cambio.To && x.From == cambio.From);
-                                        }
-                                        foreach (Rates rate in def)
-                                        {
-                                            if (tip.Count() > 0)
-                                            {
-                                                propina = new Propinas(pedido)
-                                                {
-                                                    Currency = moneda,
-                                                    Amount = rate.Rate * pedido.Amount,
-                                                    Tip = CalcularPropina(rate.Rate * pedido.Amount)
-                                                };
-                                                propinas.Add(propina);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    pedido.Amount = CalcularRates(moneda, rates, pedido);
                 }
             }
             catch (Exception ex)
@@ -172,6 +90,27 @@ namespace Tips_Calculator.Logic
             return propinas;
         }
 
+        private static List<Propinas> ObtenerPropinas(List<Pedidos> pedidos)
+        {
+            List<Propinas> propinas = new List<Propinas>();
+            Propinas propina = new Propinas();
+            foreach (var pedido in pedidos)
+            {
+                propina = new Propinas(pedido)
+                {
+                    Tip = CalcularPropina(pedido.Amount)
+                };
+                propinas.Add(propina);
+                
+            }
+            return propinas;
+        }
+
+        private static decimal CalcularRates(string moneda, List<Rates> rates, Pedidos pedido)
+        {
+            decimal rate = 1;
+            return rate;
+        }
 
         private static decimal CalcularPropina(decimal amount)
         {
