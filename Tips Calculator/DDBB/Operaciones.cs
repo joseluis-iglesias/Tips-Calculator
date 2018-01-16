@@ -128,9 +128,9 @@ namespace Tips_Calculator.DDBB
             return rates;
         }
 
-        public static List<Pedidos> ObtenerPedidos()
+        public static List<Pedido> ObtenerPedidos()
         {
-            List<Pedidos> pedidos = new List<Pedidos>();
+            List<Pedido> pedidos = new List<Pedido>();
             using (MySqlConnection conn = new Conexion().GetConexion())
             {
                 Conexion.AbrirConexion(conn);
@@ -142,7 +142,7 @@ namespace Tips_Calculator.DDBB
                         var reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
-                            Pedidos pedido = new Pedidos();
+                            Pedido pedido = new Pedido();
                             pedido.Currency = reader["CURRENCY"].ToString();
                             pedido.Amount = (decimal)reader["AMOUNT"];
                             pedido.Sku = reader["SKU"].ToString();
