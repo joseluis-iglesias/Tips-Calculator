@@ -57,7 +57,7 @@ namespace Tips_Calculator.DDBB
             }
         }
 
-        public static void InsertarPedidos(List<Pedidos> pedidos)
+        public static void InsertarPedidos(List<Pedido> pedidos)
         {
             using (MySqlConnection conn = new Conexion().GetConexion())
             {
@@ -72,7 +72,7 @@ namespace Tips_Calculator.DDBB
                         cmd.ExecuteNonQuery();
                     }
 
-                    foreach (Pedidos pedido in pedidos)
+                    foreach (Pedido pedido in pedidos)
                     {
                         using (MySqlCommand cmd = new MySqlCommand(_InsertarPedidos, conn))
                         {

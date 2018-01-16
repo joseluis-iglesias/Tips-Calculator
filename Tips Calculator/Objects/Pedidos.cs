@@ -3,7 +3,7 @@
 namespace Tips_Calculator.Objects
 {
     [DataContract]
-    public class Pedidos
+    public class Pedido
     {
         #region Propiedades
         [DataMember]
@@ -12,8 +12,10 @@ namespace Tips_Calculator.Objects
         public string Currency { get; set; }
         [DataMember]
         public decimal Amount { get; set; }
+        [DataMember]
+        public decimal Tip { get; set; }
         #endregion
 
-        public Pedidos() { }
+        public Pedido() { }
     }
 }

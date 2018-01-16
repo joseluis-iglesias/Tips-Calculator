@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Net;
 using Tips_Calculator.Objects;
+using Tips_Calculator.Logic;
 
 namespace Tips_Calculator
 {
@@ -15,10 +16,10 @@ namespace Tips_Calculator
 
         public string GetListaPedidos()
         {
-            List<Pedidos> listaPedidos = new List<Pedidos>();
+            List<Pedido> listaPedidos = new List<Pedido>();
             try
             {
-                listaPedidos = JsonConvert.DeserializeObject<List<Pedidos>>(ObtenerDatos(_TransactionsURI));
+                listaPedidos = JsonConvert.DeserializeObject<List<Pedido>>(ObtenerDatos(_TransactionsURI));
                 Logic.Logic.GuardarPedidos(listaPedidos);
             }
             catch (WebException wex)
@@ -40,7 +41,7 @@ namespace Tips_Calculator
             try
             {
                 listaRates = JsonConvert.DeserializeObject<List<Rates>>(ObtenerDatos(_RatesURI));
-                Logic.Logic.GuardarRates(listaRates);
+                ILogic.obtenerdatosRates(listaRates);
             }
             catch (WebException wex)
             {
@@ -54,15 +55,14 @@ namespace Tips_Calculator
 
             return JsonConvert.SerializeObject(listaRates);
         }
-
+        /*TO DO*/
         public string CalcularPropina(string cuenta, string moneda)
         {
-            List<Pedidos> pedidos;
+            List<Pedido> pedidos;
             List<Rates> rates;
-            List<Propinas> propinas;
             try
             {
-                pedidos = JsonConvert.DeserializeObject<List<Pedidos>>(ObtenerDatos(_TransactionsURI));
+                pedidos = JsonConvert.DeserializeObject<List<Pedido>>(ObtenerDatos(_TransactionsURI));
                 rates = JsonConvert.DeserializeObject<List<Rates>>(ObtenerDatos(_RatesURI));
             }
             catch (WebException wex)
@@ -79,7 +79,7 @@ namespace Tips_Calculator
             }
             try
             {
-                propinas = Logic.Logic.CalcularPropinas(cuenta, moneda, rates, pedidos);
+                pedidos = Logic.Logic.CalcularPropinas(cuenta, moneda, rates, pedidos);
             }
             catch (Exception ex)
             {
@@ -87,16 +87,15 @@ namespace Tips_Calculator
                 _Log.Warn("Error a la hora de calcular las propinas, si este error persiste pongase en contacto con el administrador.");
                 throw ex;
             }
-            return JsonConvert.SerializeObject(propinas);
+            return JsonConvert.SerializeObject(pedidos);
         }
 
         public string ObtenerDatos(string uri ) {
-            string json = "";
             try
             {
                 using (WebClient wc = new WebClient())
                 {
-                    json = wc.DownloadString(uri);
+                    return wc.DownloadString(uri);
                 }
             }
             catch (WebException wex)
@@ -110,7 +109,6 @@ namespace Tips_Calculator
                 _Log.Error("Error en ObtenerDatos: " + ex.Message);
                 throw ex;
             }
-            return json;
         }
     }
 }

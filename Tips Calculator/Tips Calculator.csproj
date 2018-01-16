@@ -107,10 +107,10 @@
   <ItemGroup>
     <Compile Include="DDBB\Conexion.cs" />
     <Compile Include="DDBB\Operaciones.cs" />
+    <Compile Include="Logic\ILogic.cs" />
     <Compile Include="Logic\Logic.cs" />
     <Compile Include="Objects\PedidoDesglose.cs" />
     <Compile Include="Objects\Pedidos.cs" />
-    <Compile Include="Objects\Propinas.cs" />
     <Compile Include="Objects\Rates.cs" />
     <Compile Include="Servicio\IService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

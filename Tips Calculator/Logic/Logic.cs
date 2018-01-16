@@ -5,7 +5,7 @@ using Tips_Calculator.Objects;
 
 namespace Tips_Calculator.Logic
 {
-    public class Logic
+    public class Logic : ILogic
     {
         private static readonly log4net.ILog _Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private static decimal _Porcentaje = 0.05M;
@@ -24,7 +24,7 @@ namespace Tips_Calculator.Logic
             return rates;
         }
 
-        public static List<Pedidos> GuardarPedidos(List<Pedidos> pedidos)
+        public static List<Pedido> GuardarPedidos(List<Pedido> pedidos)
         {
             try
             {
@@ -53,9 +53,9 @@ namespace Tips_Calculator.Logic
             return rates;
         }
 
-        public static List<Pedidos> ObtenerPedidos()
+        public static List<Pedido> ObtenerPedidos()
         {
-            List<Pedidos> pedidos;
+            List<Pedido> pedidos;
             try
             {
                 pedidos = DDBB.Operaciones.ObtenerPedidos();
@@ -68,9 +68,9 @@ namespace Tips_Calculator.Logic
             return pedidos;
         }
         /* TO DO*/
-        public static List<Propinas> CalcularPropinas(string cuenta, string moneda, List<Rates> rates, List<Pedidos> pedidos)
+        public static List<Pedido> CalcularPropinas(string cuenta, string moneda, List<Rates> rates, List<Pedido> pedidos)
         {
-            List<Propinas> propinas = new List<Propinas>();
+            List<Pedido> propinas = new List<Pedido>();
             PedidoDesglose pedidoDesglose = new PedidoDesglose();
             try
             {
@@ -94,13 +94,13 @@ namespace Tips_Calculator.Logic
             return propinas;
         }
 
-        private static List<Propinas> ObtenerPropinas(List<Pedidos> pedidos)
+        private static List<Pedido> ObtenerPropinas(List<Pedido> pedidos)
         {
-            List<Propinas> propinas = new List<Propinas>();
-            Propinas propina = new Propinas();
+            List<Pedido> propinas = new List<Pedido>();
+            Pedido propina = new Pedido();
             foreach (var pedido in pedidos)
             {
-                propina = new Propinas(pedido)
+                propina = new Pedido()
                 {
                     Tip = CalcularPropina(pedido.Amount)
                 };
@@ -123,11 +123,11 @@ namespace Tips_Calculator.Logic
             else
             {
                 rate = rates.FindAll(x => x.From == pedido);
-                foreach (var rr in rate)
+                foreach (var rt in rate)
                 {
-                    var ratos = rates.FindAll(x => x.From == pedido && x.To == moneda);
-                    if (rates.FindAll(x => x.From == pedido))
-                        tip = RedondearDecimales(tip * CalcularRates(rr.To, rates, pedido));
+                    var ratos = rates.FindAll(x => x.From == rt.To && x.To == moneda);
+                    if (ratos.Count() > 0 )
+                        tip = RedondearDecimales(tip * CalcularRates(rt.To, rates, pedido));
                 }
             }
             return tip;

@@ -8,11 +8,17 @@ using System.Threading.Tasks;
 namespace Tips_Calculator.Objects
 {
     [DataContract]
-    public class PedidoDesglose : Pedidos
+    public class PedidoDesglose
     {
         #region Propiedades
         [DataMember]
-        public List<Pedidos> Pedidos { get; set; }
+        public string Currency { get; set; }
+        [DataMember]
+        public decimal Amount { get; set; }
+        [DataMember]
+        public decimal Tip { get; set; }
+        [DataMember]
+        public List<Pedido> Pedidos { get; set; }
         #endregion
         public PedidoDesglose() { }
     }
