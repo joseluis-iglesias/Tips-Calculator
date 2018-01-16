@@ -3,15 +3,14 @@ using System.Configuration;
 
 namespace Tips_Calculator.DDBB
 {
-    class Conexion
+    public class Conexion : IConexion
     {
         private static readonly log4net.ILog _Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private string _Server;
         private string _Database;
         private string _Uid;
         private string _Password;
-
-        //Constructor
+       
         public MySqlConnection GetConexion()
         {
             return Initialize();
@@ -30,7 +29,7 @@ namespace Tips_Calculator.DDBB
            return new MySqlConnection(connectionString);
         }
 
-        public static void AbrirConexion(MySqlConnection connection)
+        public void AbrirConexion(MySqlConnection connection)
         {
             try
             {
@@ -52,7 +51,7 @@ namespace Tips_Calculator.DDBB
             }
         }
 
-        public static void CerrarConexion(MySqlConnection connection)
+        public void CerrarConexion(MySqlConnection connection)
         {
             try
             {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Tips_Calculator.DDBB;
 using Tips_Calculator.Objects;
 
 namespace Tips_Calculator.Logic
@@ -10,40 +11,45 @@ namespace Tips_Calculator.Logic
         private static readonly log4net.ILog _Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private static decimal _Porcentaje = 0.05M;
 
-        public static List<Rates> GuardarRates(List<Rates> rates)
+        protected IOperaciones operaciones;
+
+        public Logic(IOperaciones operaciones)
+        {
+            this.operaciones = operaciones;
+        }
+
+        public void GuardarRates(List<Rates> rates)
         {
             try
             {
-                DDBB.Operaciones.InsertarRates(rates);
+                operaciones.InsertarRates(rates);
             }
             catch (Exception ex)
             {
                 _Log.Error("Error detectado a lo hora de guardar/borrar los rates: " + ex.Message);
                 throw ex;
             }
-            return rates;
         }
 
-        public static List<Pedido> GuardarPedidos(List<Pedido> pedidos)
+        public void GuardarPedidos(List<Pedido> pedidos)
         {
             try
             {
-                DDBB.Operaciones.InsertarPedidos(pedidos);
+                operaciones.InsertarPedidos(pedidos);
             }
             catch (Exception ex)
             {
                 _Log.Error("Error detectado a lo hora de guardar/borrar los pedidos: " + ex.Message);
                 throw ex;
             }
-            return pedidos;
         }
 
-        public static List<Rates> ObtenerRates()
+        public  List<Rates> ObtenerRates()
         {
             List<Rates> rates;
             try
             {
-                rates = DDBB.Operaciones.ObtenerRates();
+                rates = operaciones.ObtenerRates();
             }
             catch (Exception ex)
             {
@@ -53,12 +59,12 @@ namespace Tips_Calculator.Logic
             return rates;
         }
 
-        public static List<Pedido> ObtenerPedidos()
+        public  List<Pedido> ObtenerPedidos()
         {
             List<Pedido> pedidos;
             try
             {
-                pedidos = DDBB.Operaciones.ObtenerPedidos();
+                pedidos = operaciones.ObtenerPedidos();
             }
             catch (Exception ex)
             {
@@ -68,7 +74,7 @@ namespace Tips_Calculator.Logic
             return pedidos;
         }
         /* TO DO*/
-        public static List<Pedido> CalcularPropinas(string cuenta, string moneda, List<Rates> rates, List<Pedido> pedidos)
+        public PedidoDesglose CalcularPropinas(string cuenta, string moneda, List<Rates> rates, List<Pedido> pedidos)
         {
             List<Pedido> propinas = new List<Pedido>();
             PedidoDesglose pedidoDesglose = new PedidoDesglose();
@@ -91,7 +97,7 @@ namespace Tips_Calculator.Logic
                 _Log.Error(ex.Message);
                 throw ex;
             }
-            return propinas;
+            return pedidoDesglose;
         }
 
         private static List<Pedido> ObtenerPropinas(List<Pedido> pedidos)

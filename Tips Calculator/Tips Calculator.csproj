@@ -13,7 +13,7 @@
     <AssemblyName>Tips Calculator</AssemblyName>
     <ProjectTypeGuids>{3D9AD99F-2412-4246-B90B-4EAA41C64699};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <StartArguments>/client:"WcfTestClient.exe"</StartArguments>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
     <XsdCodeGenEnabled>True</XsdCodeGenEnabled>
     <TargetFrameworkProfile />
@@ -106,6 +106,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DDBB\Conexion.cs" />
+    <Compile Include="DDBB\IConexion.cs" />
+    <Compile Include="DDBB\IOperaciones.cs" />
     <Compile Include="DDBB\Operaciones.cs" />
     <Compile Include="Logic\ILogic.cs" />
     <Compile Include="Logic\Logic.cs" />

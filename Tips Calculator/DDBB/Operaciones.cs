@@ -1,14 +1,11 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tips_Calculator.Objects;
 
 namespace Tips_Calculator.DDBB
 {
-    public class Operaciones
+    public class Operaciones : IOperaciones
     {
         private static readonly log4net.ILog _Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private const string _InsertarRates = "`tips_calculator`.`InsertarRates`";
@@ -17,12 +14,18 @@ namespace Tips_Calculator.DDBB
         private const string _InsertarPedidos = "`tips_calculator`.`InsertarTransactions`";
         private const string _ObtenerPedidos = "`tips_calculator`.`ObtenerTransactions`";
         private const string _EliminarPedidos = "`tips_calculator`.`EliminarTransactions`";
+        protected IConexion conexion;
 
-        public static void InsertarRates(List<Rates> rates)
+        public Operaciones(IConexion conexion)
         {
-            using (MySqlConnection conn = new Conexion().GetConexion())
+            this.conexion = conexion;
+        }
+
+        public void InsertarRates(List<Rates> rates)
+        {
+            using (MySqlConnection conn = conexion.GetConexion())
             {
-                Conexion.AbrirConexion(conn);
+                conexion.AbrirConexion(conn);
                 MySqlTransaction transaction = conn.BeginTransaction(System.Data.IsolationLevel.Serializable);
                 try
                 {
@@ -46,7 +49,7 @@ namespace Tips_Calculator.DDBB
                         }
                     }
                     transaction.Commit();
-                    Conexion.CerrarConexion(conn);
+                    conexion.CerrarConexion(conn);
                 }
                 catch (Exception ex)
                 {
@@ -57,11 +60,11 @@ namespace Tips_Calculator.DDBB
             }
         }
 
-        public static void InsertarPedidos(List<Pedido> pedidos)
+        public void InsertarPedidos(List<Pedido> pedidos)
         {
-            using (MySqlConnection conn = new Conexion().GetConexion())
+            using (MySqlConnection conn =  conexion.GetConexion())
             {
-                Conexion.AbrirConexion(conn);
+                conexion.AbrirConexion(conn);
                 MySqlTransaction transaction = conn.BeginTransaction(System.Data.IsolationLevel.Serializable);
                 try
                 {
@@ -85,7 +88,7 @@ namespace Tips_Calculator.DDBB
                         }
                     }
                     transaction.Commit();
-                    Conexion.CerrarConexion(conn);
+                    conexion.CerrarConexion(conn);
                 }
                 catch (Exception ex)
                 {
@@ -96,12 +99,12 @@ namespace Tips_Calculator.DDBB
             }
         }
 
-        public static List<Rates> ObtenerRates()
+        public List<Rates> ObtenerRates()
         {
             List<Rates> rates = new List<Rates>();
-            using (MySqlConnection conn = new Conexion().GetConexion())
+            using (MySqlConnection conn =  conexion.GetConexion())
             {
-                Conexion.AbrirConexion(conn);
+                conexion.AbrirConexion(conn);
                 try
                 {
                     using (MySqlCommand cmd = new MySqlCommand(_ObtenerRates, conn))
@@ -117,7 +120,7 @@ namespace Tips_Calculator.DDBB
                             rates.Add(rate);
                         }
                     }
-                    Conexion.CerrarConexion(conn);
+                    conexion.CerrarConexion(conn);
                 }
                 catch (Exception ex)
                 {
@@ -128,12 +131,12 @@ namespace Tips_Calculator.DDBB
             return rates;
         }
 
-        public static List<Pedido> ObtenerPedidos()
+        public List<Pedido> ObtenerPedidos()
         {
             List<Pedido> pedidos = new List<Pedido>();
-            using (MySqlConnection conn = new Conexion().GetConexion())
+            using (MySqlConnection conn =  conexion.GetConexion())
             {
-                Conexion.AbrirConexion(conn);
+                conexion.AbrirConexion(conn);
                 try
                 {
                     using (MySqlCommand cmd = new MySqlCommand(_ObtenerPedidos, conn))
@@ -149,7 +152,7 @@ namespace Tips_Calculator.DDBB
                             pedidos.Add(pedido);
                         }
                     }
-                    Conexion.CerrarConexion(conn);
+                    conexion.CerrarConexion(conn);
                 }
 
                 catch (Exception ex)

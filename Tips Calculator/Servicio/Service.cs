@@ -13,6 +13,11 @@ namespace Tips_Calculator
         private static readonly log4net.ILog _Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private static string _RatesURI= ConfigurationManager.AppSettings["Rates"];
         private static string _TransactionsURI = ConfigurationManager.AppSettings["Transactions"];
+        protected ILogic logic;
+        public Service(ILogic logic)
+        {
+            this.logic = logic;
+        }
 
         public string GetListaPedidos()
         {
@@ -20,12 +25,12 @@ namespace Tips_Calculator
             try
             {
                 listaPedidos = JsonConvert.DeserializeObject<List<Pedido>>(ObtenerDatos(_TransactionsURI));
-                Logic.Logic.GuardarPedidos(listaPedidos);
+                logic.GuardarPedidos(listaPedidos);
             }
             catch (WebException wex)
             {
                 _Log.Info("Se ha detectado un error en la conexion, procedemos a recoger los datos de nuestro respaldo." + wex.Message);
-                listaPedidos = Logic.Logic.ObtenerPedidos();
+                listaPedidos = logic.ObtenerPedidos();
             }
             catch (Exception ex)
             {
@@ -41,12 +46,12 @@ namespace Tips_Calculator
             try
             {
                 listaRates = JsonConvert.DeserializeObject<List<Rates>>(ObtenerDatos(_RatesURI));
-                ILogic.obtenerdatosRates(listaRates);
+                logic.GuardarRates(listaRates);
             }
             catch (WebException wex)
             {
                 _Log.Info("Se ha detectado un error en la conexion, procedemos a recoger los datos de nuestro respaldo."+ wex.Message);
-                listaRates = Logic.Logic.ObtenerRates();
+                listaRates = logic.ObtenerRates();
             }
             catch (Exception ex)
             {
@@ -60,6 +65,7 @@ namespace Tips_Calculator
         {
             List<Pedido> pedidos;
             List<Rates> rates;
+            PedidoDesglose pedidoDesglose;
             try
             {
                 pedidos = JsonConvert.DeserializeObject<List<Pedido>>(ObtenerDatos(_TransactionsURI));
@@ -69,8 +75,8 @@ namespace Tips_Calculator
             {
                 _Log.Warn("Error al intentar acceder a la url especificada. Continuamos la operacion recogiendo los datos de nuestro respaldo.");
                 _Log.Error(wex.Message);
-                rates = Logic.Logic.ObtenerRates();
-                pedidos = Logic.Logic.ObtenerPedidos();
+                rates = logic.ObtenerRates();
+                pedidos = logic.ObtenerPedidos();
             }
             catch (Exception ex)
             {
@@ -79,7 +85,7 @@ namespace Tips_Calculator
             }
             try
             {
-                pedidos = Logic.Logic.CalcularPropinas(cuenta, moneda, rates, pedidos);
+                pedidoDesglose = logic.CalcularPropinas(cuenta, moneda, rates, pedidos);
             }
             catch (Exception ex)
             {
