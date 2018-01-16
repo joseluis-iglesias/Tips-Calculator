@@ -7,7 +7,7 @@ namespace Tips_Calculator.Logic
 {
     public class Logic
     {
-        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog _Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private static decimal _Porcentaje = 0.05M;
 
         public static List<Rates> GuardarRates(List<Rates> rates)
@@ -18,7 +18,7 @@ namespace Tips_Calculator.Logic
             }
             catch (Exception ex)
             {
-                log.Error("Error detectado a lo hora de guardar/borrar los rates: " + ex.Message);
+                _Log.Error("Error detectado a lo hora de guardar/borrar los rates: " + ex.Message);
                 throw ex;
             }
             return rates;
@@ -32,7 +32,7 @@ namespace Tips_Calculator.Logic
             }
             catch (Exception ex)
             {
-                log.Error("Error detectado a lo hora de guardar/borrar los pedidos: " + ex.Message);
+                _Log.Error("Error detectado a lo hora de guardar/borrar los pedidos: " + ex.Message);
                 throw ex;
             }
             return pedidos;
@@ -47,7 +47,7 @@ namespace Tips_Calculator.Logic
             }
             catch (Exception ex)
             {
-                log.Error("Error detectado a lo hora de obtener los rates: " + ex.Message);
+                _Log.Error("Error detectado a lo hora de obtener los rates: " + ex.Message);
                 throw ex;
             }
             return rates;
@@ -62,7 +62,7 @@ namespace Tips_Calculator.Logic
             }
             catch (Exception ex)
             {
-                log.Error("Error detectado a lo hora de obtener los pedidos: " + ex.Message);
+                _Log.Error("Error detectado a lo hora de obtener los pedidos: " + ex.Message);
                 throw ex;
             }
             return pedidos;
@@ -71,6 +71,7 @@ namespace Tips_Calculator.Logic
         public static List<Propinas> CalcularPropinas(string cuenta, string moneda, List<Rates> rates, List<Pedidos> pedidos)
         {
             List<Propinas> propinas = new List<Propinas>();
+            PedidoDesglose pedidoDesglose = new PedidoDesglose();
             try
             {
                 var pedidosSelect = pedidos.FindAll(x => x.Sku == cuenta);
@@ -83,10 +84,11 @@ namespace Tips_Calculator.Logic
                     pedido.Amount = RedondearDecimales( pedido.Amount * CalcularRates(moneda, rates, pedido.Currency));
                 }
                 decimal amountTotalDis = (from pedido in pedidosDifMon select pedido.Amount).Sum();
+                pedidoDesglose.Amount = RedondearDecimales(CalcularPropina(amountTotalDis + amountTotalIg));
             }
             catch (Exception ex)
             {
-                log.Error(ex.Message);
+                _Log.Error(ex.Message);
                 throw ex;
             }
             return propinas;
@@ -116,15 +118,19 @@ namespace Tips_Calculator.Logic
             {
                 foreach (var t in rate)
                     tip = tip* t.Rate;
-                return RedondearDecimales(tip);
+                 RedondearDecimales(tip);
             }
             else
             {
                 rate = rates.FindAll(x => x.From == pedido);
                 foreach (var rr in rate)
-                    RedondearDecimales(tip * CalcularRates(rr.To, rates, pedido));
-                return tip;
+                {
+                    var ratos = rates.FindAll(x => x.From == pedido && x.To == moneda);
+                    if (rates.FindAll(x => x.From == pedido))
+                        tip = RedondearDecimales(tip * CalcularRates(rr.To, rates, pedido));
+                }
             }
+            return tip;
         }
 
         private static decimal CalcularPropina(decimal amount)
@@ -135,8 +141,8 @@ namespace Tips_Calculator.Logic
             }
             catch (Exception ex)
             {
-                log.Error(ex.Message);
-                log.Warn("Error a la hora de realizar el Calculo de la propina");
+                _Log.Error(ex.Message);
+                _Log.Warn("Error a la hora de realizar el Calculo de la propina");
                 throw ex;
             }
         }
