@@ -70,3 +70,40 @@ C:\Users\jiglesias\Documents\GitHub\Tips-Calculator\Tips Calculator\bin\Debug\Sy
 C:\Users\jiglesias\Documents\GitHub\Tips-Calculator\Tips Calculator\bin\Debug\System.Web.WebPages.Razor.xml
 C:\Users\jiglesias\Documents\GitHub\Tips-Calculator\Tips Calculator\bin\Debug\WebMatrix.Data.xml
 C:\Users\jiglesias\Documents\GitHub\Tips-Calculator\Tips Calculator\bin\Debug\WebMatrix.WebData.xml
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\log4net.config
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\Tips Calculator.dll.config
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\Tips Calculator.dll
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\Tips Calculator.pdb
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\EntityFramework.dll
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\log4net.dll
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\MySql.Data.dll
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\MySql.Data.Entity.EF6.dll
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\MySql.Web.dll
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\Newtonsoft.Json.dll
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\System.Web.Helpers.dll
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\System.Web.Razor.dll
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\System.Web.WebPages.dll
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\WebMatrix.Data.dll
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\WebMatrix.WebData.dll
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\EntityFramework.xml
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\log4net.xml
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\MySql.Data.xml
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\MySql.Data.Entity.EF6.xml
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\MySql.Web.xml
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\Newtonsoft.Json.xml
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\System.Web.Helpers.xml
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\System.Web.Razor.xml
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\System.Web.WebPages.xml
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\WebMatrix.Data.xml
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\bin\Debug\WebMatrix.WebData.xml
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\obj\Debug\Tips Calculator.csprojResolveAssemblyReference.cache
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\obj\Debug\Tips Calculator.csproj.CoreCompileInputs.cache
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\obj\Debug\Tips Calculator.dll
+C:\Users\jiglesias\Documents\GitHub\Tips Calculator\obj\Debug\Tips Calculator.pdb

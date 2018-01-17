@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 using System.Runtime.Serialization;
 
 namespace Tips_Calculator.Objects
@@ -11,7 +12,7 @@ namespace Tips_Calculator.Objects
         public string From { get; set; }
         [DataMember]
         public string To { get; set; }
-        [DataMember]
+        [JsonProperty(PropertyName = "Rate")]
         public decimal Cambio { get; set; }
         #endregion
 
