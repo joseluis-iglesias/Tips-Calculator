@@ -91,8 +91,8 @@ namespace Tips_Calculator.Logic
                 }
                 decimal amountTotalDis = (from pedido in pedidosDifMon select pedido.Amount).Sum();
                 
-                pedidoDesglose.Amount = RedondearDecimales(CalcularPropina(amountTotalDis + amountTotalIg));
-                pedidoDesglose.Tip = CalcularPropina(pedidoDesglose.Amount);
+                pedidoDesglose.Amount = RedondearDecimales(amountTotalDis + amountTotalIg);
+                pedidoDesglose.Tip = RedondearDecimales(CalcularPropina(pedidoDesglose.Amount));
             }
             catch (Exception ex)
             {
@@ -126,9 +126,12 @@ namespace Tips_Calculator.Logic
             try
             {
                 Rate r = rates.Find(x => x.From == moneda && x.To == pedido);
-                monedasObtenidas.Add(moneda);
 
-                if (r != null) return r.Cambio;
+
+                if (r != null)
+                {
+                    return r.Cambio;
+                }
                 else
                 {
                     List<Rate> l = rates.FindAll(x => x.From == moneda && !monedasObtenidas.Any(y => y == moneda));
@@ -136,6 +139,7 @@ namespace Tips_Calculator.Logic
                     {
                         foreach (Rate elem in l)
                         {
+                            monedasObtenidas.Add(moneda);
                             decimal d = elem.Cambio * CalcularRates(elem.To, rates, pedido, monedasObtenidas);
                             if (d != 0) return d;
                         }
