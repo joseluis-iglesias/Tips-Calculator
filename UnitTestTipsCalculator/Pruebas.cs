@@ -12,8 +12,7 @@ namespace UnitTestTipsCalculator
         [TestMethod]
         public void ObtenerRates()
         {
-            IConexion conexion = new Conexion();
-            IOperaciones operaciones = new Operaciones(conexion);
+            IOperaciones operaciones = new Operaciones();
             ILogic logic = new Logic(operaciones);
             IService service = new Service(logic);
             try
@@ -30,8 +29,7 @@ namespace UnitTestTipsCalculator
         [TestMethod]
         public void ObtenerTransacciones()
         {
-            IConexion conexion = new Conexion();
-            IOperaciones operaciones = new Operaciones(conexion);
+            IOperaciones operaciones = new Operaciones();
             ILogic logic = new Logic(operaciones);
             IService service = new Service(logic);
             try
@@ -48,8 +46,7 @@ namespace UnitTestTipsCalculator
         [TestMethod]
         public void CalcularPropinas()
         {
-            IConexion conexion = new Conexion();
-            IOperaciones operaciones = new Operaciones(conexion);
+            IOperaciones operaciones = new Operaciones();
             ILogic logic = new Logic(operaciones);
             IService service = new Service(logic);
             try

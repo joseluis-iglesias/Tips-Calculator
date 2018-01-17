@@ -16,3 +16,12 @@
 2018-01-16 10:09:23,962 [7] ERROR Tips_Calculator.Logic.Logic - Error detectado a lo hora de guardar/borrar los rates: Authentication to host 'localhost' for user 'jose' using method 'mysql_native_password' failed with message: Access denied for user 'jose'@'localhost' (using password: YES)
 2018-01-16 11:14:00,014 [9] ERROR Tips_Calculator.DDBB.Conexion - No se ha podido conectar al servidor. Contacte con el admionistrador del servicio.
 2018-01-16 11:14:00,102 [9] ERROR Tips_Calculator.Logic.Logic - Error detectado a lo hora de guardar/borrar los rates: Authentication to host 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root'@'localhost' (using password: YES)
+2018-01-17 21:55:19,608 [12] WARN Tips_Calculator.Service - Error al intentar acceder a la url especificada. Continuamos la operacion recogiendo los datos de nuestro respaldo.
+2018-01-17 21:55:19,608 [12] ERROR Tips_Calculator.Service - No se puede resolver el nombre remoto: 'quiet-stokuapp.com'
+2018-01-17 21:55:21,677 [12] INFO Tips_Calculator.Service - Se ha detectado un error en la conexion, procedemos a recoger los datos de nuestro respaldo.No se puede resolver el nombre remoto: 'quiet-stokuapp.com'
+2018-01-17 22:02:38,534 [10] ERROR Tips_Calculator.DDBB.Operaciones - Unexpected character encountered while parsing value: S. Path '', line 0, position 0.
+2018-01-17 22:02:38,543 [10] WARN Tips_Calculator.DDBB.Operaciones - Error a la hora de recoger los datos del archivo
+2018-01-17 22:02:38,555 [10] ERROR Tips_Calculator.Logic.Logic - Error detectado a lo hora de obtener los pedidos: Unexpected character encountered while parsing value: S. Path '', line 0, position 0.
+2018-01-17 22:03:13,330 [11] ERROR Tips_Calculator.DDBB.Operaciones - Unexpected character encountered while parsing value: S. Path '', line 0, position 0.
+2018-01-17 22:03:13,339 [11] WARN Tips_Calculator.DDBB.Operaciones - Error a la hora de recoger los datos del archivo
+2018-01-17 22:03:13,352 [11] ERROR Tips_Calculator.Logic.Logic - Error detectado a lo hora de obtener los pedidos: Unexpected character encountered while parsing value: S. Path '', line 0, position 0.

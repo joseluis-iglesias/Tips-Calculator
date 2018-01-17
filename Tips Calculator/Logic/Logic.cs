@@ -46,7 +46,7 @@ namespace Tips_Calculator.Logic
 
         public  List<Rate> ObtenerRates()
         {
-            List<Rate> rates;
+            List<Rate> rates = new List<Rate>();
             try
             {
                 rates = operaciones.ObtenerRates();
@@ -61,7 +61,7 @@ namespace Tips_Calculator.Logic
 
         public  List<Pedido> ObtenerPedidos()
         {
-            List<Pedido> pedidos;
+            List<Pedido> pedidos = new List<Pedido>();
             try
             {
                 pedidos = operaciones.ObtenerPedidos();
@@ -113,7 +113,7 @@ namespace Tips_Calculator.Logic
                     Amount= pedido.Amount,
                     Currency= pedido.Currency,
                     Sku=pedido.Sku,
-                    Tip = CalcularPropina(pedido.Amount)
+                    Tip = RedondearDecimales(CalcularPropina(pedido.Amount))
                 };
                 propinas.Add(propina);
                 

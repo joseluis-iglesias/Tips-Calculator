@@ -107,3 +107,34 @@ C:\Users\jiglesias\Documents\GitHub\Tips Calculator\obj\Debug\Tips Calculator.cs
 C:\Users\jiglesias\Documents\GitHub\Tips Calculator\obj\Debug\Tips Calculator.csproj.CoreCompileInputs.cache
 C:\Users\jiglesias\Documents\GitHub\Tips Calculator\obj\Debug\Tips Calculator.dll
 C:\Users\jiglesias\Documents\GitHub\Tips Calculator\obj\Debug\Tips Calculator.pdb
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\log4net.config
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\Tips Calculator.dll.config
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\Tips Calculator.dll
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\Tips Calculator.pdb
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\EntityFramework.dll
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\log4net.dll
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\System.Web.Helpers.dll
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\System.Web.Razor.dll
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\System.Web.WebPages.dll
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\WebMatrix.Data.dll
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\WebMatrix.WebData.dll
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\EntityFramework.xml
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\log4net.xml
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\System.Web.Helpers.xml
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\System.Web.Razor.xml
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\System.Web.WebPages.xml
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\WebMatrix.Data.xml
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\bin\Debug\WebMatrix.WebData.xml
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\obj\Debug\Tips Calculator.csprojResolveAssemblyReference.cache
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\obj\Debug\Tips Calculator.csproj.CoreCompileInputs.cache
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\obj\Debug\Tips Calculator.dll
+C:\Users\Jose Luis\Tips Calculator\Tips Calculator\obj\Debug\Tips Calculator.pdb

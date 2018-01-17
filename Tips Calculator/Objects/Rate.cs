@@ -1,5 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.Runtime.Serialization;
 
 namespace Tips_Calculator.Objects

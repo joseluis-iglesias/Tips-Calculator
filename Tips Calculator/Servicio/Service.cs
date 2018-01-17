@@ -61,7 +61,6 @@ namespace Tips_Calculator
 
             return JsonConvert.SerializeObject(listaRates);
         }
-        /*TO DO*/
         public string CalcularPropina(string cuenta, string moneda)
         {
             List<Pedido> pedidos;
