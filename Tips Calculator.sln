@@ -1,12 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tips Calculator", "Tips Calculator\Tips Calculator.csproj", "{F4497BB6-CF56-4E0D-8E20-6DFAE266F421}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{50CF275A-D7D7-498C-8170-9C9D73453A5B}"
-	ProjectSection(ProjectDependencies) = postProject
-		{F4497BB6-CF56-4E0D-8E20-6DFAE266F421} = {F4497BB6-CF56-4E0D-8E20-6DFAE266F421}
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestTipsCalculator", "UnitTestTipsCalculator\UnitTestTipsCalculator.csproj", "{A68EA25F-9553-45EA-BA8C-670D9B51AFBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,10 +17,10 @@ Global
 		{F4497BB6-CF56-4E0D-8E20-6DFAE266F421}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4497BB6-CF56-4E0D-8E20-6DFAE266F421}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4497BB6-CF56-4E0D-8E20-6DFAE266F421}.Release|Any CPU.Build.0 = Release|Any CPU
-		{50CF275A-D7D7-498C-8170-9C9D73453A5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{50CF275A-D7D7-498C-8170-9C9D73453A5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{50CF275A-D7D7-498C-8170-9C9D73453A5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{50CF275A-D7D7-498C-8170-9C9D73453A5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A68EA25F-9553-45EA-BA8C-670D9B51AFBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A68EA25F-9553-45EA-BA8C-670D9B51AFBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A68EA25F-9553-45EA-BA8C-670D9B51AFBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A68EA25F-9553-45EA-BA8C-670D9B51AFBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

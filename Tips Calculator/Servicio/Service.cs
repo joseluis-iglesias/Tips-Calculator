@@ -18,6 +18,7 @@ namespace Tips_Calculator
         {
             this.logic = logic;
         }
+        public Service() { }
 
         public string GetListaPedidos()
         {
@@ -42,10 +43,10 @@ namespace Tips_Calculator
 
         public string GetListaRates()
         {
-            List<Rates> listaRates = new List<Rates>();
+            List<Rate> listaRates = new List<Rate>();
             try
             {
-                listaRates = JsonConvert.DeserializeObject<List<Rates>>(ObtenerDatos(_RatesURI));
+                listaRates = JsonConvert.DeserializeObject<List<Rate>>(ObtenerDatos(_RatesURI));
                 logic.GuardarRates(listaRates);
             }
             catch (WebException wex)
@@ -64,12 +65,12 @@ namespace Tips_Calculator
         public string CalcularPropina(string cuenta, string moneda)
         {
             List<Pedido> pedidos;
-            List<Rates> rates;
+            List<Rate> rates;
             PedidoDesglose pedidoDesglose;
             try
             {
                 pedidos = JsonConvert.DeserializeObject<List<Pedido>>(ObtenerDatos(_TransactionsURI));
-                rates = JsonConvert.DeserializeObject<List<Rates>>(ObtenerDatos(_RatesURI));
+                rates = JsonConvert.DeserializeObject<List<Rate>>(ObtenerDatos(_RatesURI));
             }
             catch (WebException wex)
             {

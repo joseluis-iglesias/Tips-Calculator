@@ -18,7 +18,7 @@ namespace Tips_Calculator.Logic
             this.operaciones = operaciones;
         }
 
-        public void GuardarRates(List<Rates> rates)
+        public void GuardarRates(List<Rate> rates)
         {
             try
             {
@@ -44,9 +44,9 @@ namespace Tips_Calculator.Logic
             }
         }
 
-        public  List<Rates> ObtenerRates()
+        public  List<Rate> ObtenerRates()
         {
-            List<Rates> rates;
+            List<Rate> rates;
             try
             {
                 rates = operaciones.ObtenerRates();
@@ -73,24 +73,24 @@ namespace Tips_Calculator.Logic
             }
             return pedidos;
         }
-        /* TO DO*/
-        public PedidoDesglose CalcularPropinas(string cuenta, string moneda, List<Rates> rates, List<Pedido> pedidos)
+
+        public PedidoDesglose CalcularPropinas(string cuenta, string moneda, List<Rate> rates, List<Pedido> pedidos)
         {
-            List<Pedido> propinas = new List<Pedido>();
-            PedidoDesglose pedidoDesglose = new PedidoDesglose();
+            PedidoDesglose pedidoDesglose = new PedidoDesglose(){ Currency = moneda, Sku = cuenta };
             try
             {
                 var pedidosSelect = pedidos.FindAll(x => x.Sku == cuenta);
-                propinas = ObtenerPropinas(pedidosSelect);
                 var pedidosDifMon = pedidosSelect.FindAll(x => x.Currency != moneda);
                 var pedidosIgMon = pedidosSelect.FindAll(x => x.Currency == moneda);
                 decimal amountTotalIg = (from pedido in pedidosIgMon select pedido.Amount).Sum();
                 foreach (var pedido in pedidosDifMon)
                 {
-                    pedido.Amount = RedondearDecimales( pedido.Amount * CalcularRates(moneda, rates, pedido.Currency));
+                    pedido.Amount = RedondearDecimales(pedido.Amount * CalcularRates(moneda, rates, pedido.Currency));
                 }
                 decimal amountTotalDis = (from pedido in pedidosDifMon select pedido.Amount).Sum();
+                pedidoDesglose.PedidosPropina = ObtenerPropinas(pedidosSelect);
                 pedidoDesglose.Amount = RedondearDecimales(CalcularPropina(amountTotalDis + amountTotalIg));
+                pedidoDesglose.Tip = CalcularPropina(pedidoDesglose.Amount);
             }
             catch (Exception ex)
             {
@@ -116,27 +116,49 @@ namespace Tips_Calculator.Logic
             return propinas;
         }
 
-        private static decimal CalcularRates(string moneda, List<Rates> rates, string pedido)
+        private static decimal CalcularRates(string moneda, List<Rate> rates, string pedido)
         {
-            decimal tip = 1;
-            var rate = rates.FindAll(x => x.From == pedido && x.To == moneda);
-            if (rate.Count() > 0)
+            try
             {
-                foreach (var t in rate)
-                    tip = tip* t.Rate;
-                 RedondearDecimales(tip);
-            }
-            else
-            {
-                rate = rates.FindAll(x => x.From == pedido);
-                foreach (var rt in rate)
+                if (rates.Exists(x => x.From == pedido && x.To == moneda))
                 {
-                    var ratos = rates.FindAll(x => x.From == rt.To && x.To == moneda);
-                    if (ratos.Count() > 0 )
-                        tip = RedondearDecimales(tip * CalcularRates(rt.To, rates, pedido));
+                    return RedondearDecimales(rates.Find(x => x.From == pedido && x.To == moneda).Cambio);
+                }
+                else
+                {
+                    return buscarRate(moneda,rates,pedido);
+                }
+            }  
+            catch (Exception ex)
+            {
+                _Log.Error(ex.Message);
+                _Log.Warn("Error a la hora de realizar el Calculo del cambio de divisas");
+                throw ex;
+            }
+        }
+        private static decimal buscarRate(string moneda, List<Rate> rates, string pedido)
+        {
+            Rate cambio = new Rate();
+            if (!pedido.Equals(moneda))
+            {
+                var rate = rates.FindAll(x => x.From == pedido);
+                if (rate.Count > 1)
+                {
+                    foreach (var rt in rate)
+                    {
+                        if (rates.Exists(x => x.From == rt.To && x.To == moneda))
+                        {
+                            return RedondearDecimales(rt.Cambio * (rates.Find(x => x.From == rt.To && x.To == moneda).Cambio));
+                        }
+                    }
+                }
+                else
+                {
+                    cambio = rate.FirstOrDefault();
+                    return RedondearDecimales(cambio.Cambio * buscarRate(pedido, rates, cambio.To));
                 }
             }
-            return tip;
+                return 1;
         }
 
         private static decimal CalcularPropina(decimal amount)
@@ -155,7 +177,7 @@ namespace Tips_Calculator.Logic
 
         private static decimal RedondearDecimales(decimal cantidad)
         {
-            return Math.Round(Math.Truncate(cantidad), 2, MidpointRounding.ToEven);
+            return Math.Round(cantidad, 2, MidpointRounding.ToEven);
         }
     }
 }

@@ -10,11 +10,13 @@ namespace Tips_Calculator.Objects
         [DataMember]
         public string Currency { get; set; }
         [DataMember]
+        public string Sku { get; set; }
+        [DataMember]
         public decimal Amount { get; set; }
         [DataMember]
         public decimal Tip { get; set; }
         [DataMember]
-        public List<Pedido> Pedidos { get; set; }
+        public List<Pedido> PedidosPropina { get; set; }
         #endregion
         public PedidoDesglose() { }
     }

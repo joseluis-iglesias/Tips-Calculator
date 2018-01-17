@@ -8,13 +8,13 @@ namespace Tips_Calculator.DDBB
     public interface IOperaciones
     {
         [OperationContract]
-        void InsertarRates(List<Rates> rates);
+        void InsertarRates(List<Rate> rates);
 
         [OperationContract]
         void InsertarPedidos(List<Pedido> pedidos);
 
         [OperationContract]
-        List<Rates> ObtenerRates();
+        List<Rate> ObtenerRates();
 
         [OperationContract]
         List<Pedido> ObtenerPedidos();

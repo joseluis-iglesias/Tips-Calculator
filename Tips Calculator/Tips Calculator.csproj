@@ -112,8 +112,8 @@
     <Compile Include="Logic\ILogic.cs" />
     <Compile Include="Logic\Logic.cs" />
     <Compile Include="Objects\PedidoDesglose.cs" />
-    <Compile Include="Objects\Pedidos.cs" />
-    <Compile Include="Objects\Rates.cs" />
+    <Compile Include="Objects\Pedido.cs" />
+    <Compile Include="Objects\Rate.cs" />
     <Compile Include="Servicio\IService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicio\Service.cs" />

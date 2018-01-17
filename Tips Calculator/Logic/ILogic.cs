@@ -8,18 +8,18 @@ namespace Tips_Calculator.Logic
     public interface ILogic 
     {
         [OperationContract]
-        List<Rates> ObtenerRates();
+        List<Rate> ObtenerRates();
 
         [OperationContract]
         List<Pedido> ObtenerPedidos();
 
         [OperationContract]
-        void GuardarRates(List<Rates> rates);
+        void GuardarRates(List<Rate> rates);
 
         [OperationContract]
         void GuardarPedidos(List<Pedido> pedidos);
 
         [OperationContract]
-        PedidoDesglose CalcularPropinas(string cuenta, string moneda, List<Rates> rates, List<Pedido> pedidos);
+        PedidoDesglose CalcularPropinas(string cuenta, string moneda, List<Rate> rates, List<Pedido> pedidos);
     }
 }

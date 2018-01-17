@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Tips_Calculator.Objects
 {
     [DataContract]
-    public class Rates
+    public class Rate
     {
         #region propiedades
         [DataMember]
@@ -12,10 +12,10 @@ namespace Tips_Calculator.Objects
         [DataMember]
         public string To { get; set; }
         [DataMember]
-        public decimal Rate { get; set; }
+        public decimal Cambio { get; set; }
         #endregion
 
-        public Rates() { }
+        public Rate() { }
 
     }
 }

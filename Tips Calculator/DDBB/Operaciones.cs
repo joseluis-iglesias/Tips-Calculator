@@ -21,7 +21,7 @@ namespace Tips_Calculator.DDBB
             this.conexion = conexion;
         }
 
-        public void InsertarRates(List<Rates> rates)
+        public void InsertarRates(List<Rate> rates)
         {
             using (MySqlConnection conn = conexion.GetConexion())
             {
@@ -36,7 +36,7 @@ namespace Tips_Calculator.DDBB
                         cmd.ExecuteNonQuery();
                     }
 
-                    foreach (Rates rate in rates)
+                    foreach (Rate rate in rates)
                     {
                         using (MySqlCommand cmd = new MySqlCommand(_InsertarRates, conn))
                         {
@@ -44,7 +44,7 @@ namespace Tips_Calculator.DDBB
                             cmd.CommandType = System.Data.CommandType.StoredProcedure;
                             cmd.Parameters.Add(new MySqlParameter("moneda1", rate.From));
                             cmd.Parameters.Add(new MySqlParameter("moneda2", rate.To));
-                            cmd.Parameters.Add(new MySqlParameter("rate", rate.Rate));
+                            cmd.Parameters.Add(new MySqlParameter("rate", rate.Cambio));
                             cmd.ExecuteNonQuery();
                         }
                     }
@@ -99,9 +99,9 @@ namespace Tips_Calculator.DDBB
             }
         }
 
-        public List<Rates> ObtenerRates()
+        public List<Rate> ObtenerRates()
         {
-            List<Rates> rates = new List<Rates>();
+            List<Rate> rates = new List<Rate>();
             using (MySqlConnection conn =  conexion.GetConexion())
             {
                 conexion.AbrirConexion(conn);
@@ -113,10 +113,10 @@ namespace Tips_Calculator.DDBB
                         var reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
-                            Rates rate = new Rates();
+                            Rate rate = new Rate();
                             rate.From = reader["FROM"].ToString();
                             rate.To = reader["TO"].ToString();
-                            rate.Rate = (decimal)reader["RATE"];
+                            rate.Cambio = (decimal)reader["RATE"];
                             rates.Add(rate);
                         }
                     }
