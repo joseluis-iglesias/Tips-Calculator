@@ -259,3 +259,7 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+.vs/Tips Calculator/v15/Server/sqlite3/storage.ide-wal
+.vs/Tips Calculator/v15/Server/sqlite3/storage.ide
+.vs/Tips Calculator/v15/Server/sqlite3/storage.ide-shm
+.vs/Tips Calculator/v15/Server/sqlite3/storage.ide-wal
