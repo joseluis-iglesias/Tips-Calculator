@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Net;
 using Tips_Calculator.Objects;
 using Tips_Calculator.Logic;
+using Tips_Calculator.DDBB;
 
 namespace Tips_Calculator
 {
@@ -18,7 +19,16 @@ namespace Tips_Calculator
         {
             this.logic = logic;
         }
-        public Service() { }
+        private ILogic Initialize()
+        {
+            IOperaciones operaciones = new Operaciones();
+            ILogic logic = new Logic.Logic(operaciones);
+            return logic;
+        }
+        public Service()
+        {
+            this.logic = Initialize();
+        }
 
         public string GetListaPedidos()
         {
