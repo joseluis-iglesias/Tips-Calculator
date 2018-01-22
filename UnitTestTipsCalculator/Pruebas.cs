@@ -9,12 +9,21 @@ namespace UnitTestTipsCalculator
     [TestClass]
     public class Pruebas
     {
+        IOperaciones operaciones;
+        ILogic logic;
+        IService service;
+        private void Inicializar()
+        {
+            operaciones = new  Operaciones();
+            logic = new Logic(operaciones);
+            service = new Service();
+            
+        }
+
         [TestMethod]
         public void ObtenerRates()
         {
-            IOperaciones operaciones = new Operaciones();
-            ILogic logic = new Logic(operaciones);
-            IService service = new Service(logic);
+            Inicializar();
             try
             {
                 service.GetListaRates();
@@ -29,9 +38,7 @@ namespace UnitTestTipsCalculator
         [TestMethod]
         public void ObtenerTransacciones()
         {
-            IOperaciones operaciones = new Operaciones();
-            ILogic logic = new Logic(operaciones);
-            IService service = new Service(logic);
+            Inicializar();
             try
             {
                 service.GetListaPedidos();
@@ -46,9 +53,7 @@ namespace UnitTestTipsCalculator
         [TestMethod]
         public void CalcularPropinas()
         {
-            IOperaciones operaciones = new Operaciones();
-            ILogic logic = new Logic(operaciones);
-            IService service = new Service(logic);
+            Inicializar();
             try
             {
                 var pedidos = logic.ObtenerPedidos();
