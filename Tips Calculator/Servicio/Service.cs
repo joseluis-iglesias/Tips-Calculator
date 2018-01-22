@@ -45,6 +45,7 @@ namespace Tips_Calculator
             }
             catch (Exception ex)
             {
+                _Log.Error(ex.Message);
                 throw ex;
             }
              
@@ -66,11 +67,13 @@ namespace Tips_Calculator
             }
             catch (Exception ex)
             {
+                _Log.Error(ex.Message);
                 throw ex;
             }
 
             return JsonConvert.SerializeObject(listaRates);
         }
+
         public string CalcularPropina(string cuenta, string moneda)
         {
             List<Pedido> pedidos;
@@ -78,8 +81,8 @@ namespace Tips_Calculator
             PedidoDesglose pedidoDesglose;
             try
             {
-                pedidos = JsonConvert.DeserializeObject<List<Pedido>>(ObtenerDatos(_TransactionsURI));
-                rates = JsonConvert.DeserializeObject<List<Rate>>(ObtenerDatos(_RatesURI));
+                pedidos = JsonConvert.DeserializeObject<List<Pedido>>(GetListaPedidos());
+                rates = JsonConvert.DeserializeObject<List<Rate>>(GetListaRates());
             }
             catch (WebException wex)
             {
@@ -95,7 +98,7 @@ namespace Tips_Calculator
             }
             try
             {
-                pedidoDesglose = logic.CalcularPropinas(cuenta, moneda, rates, pedidos);
+                pedidoDesglose = logic.CalcularPropinas(cuenta, moneda.ToUpper(), rates, pedidos);
             }
             catch (Exception ex)
             {
@@ -103,7 +106,7 @@ namespace Tips_Calculator
                 _Log.Warn("Error a la hora de calcular las propinas, si este error persiste pongase en contacto con el administrador.");
                 throw ex;
             }
-            return JsonConvert.SerializeObject(pedidos);
+            return JsonConvert.SerializeObject(pedidoDesglose);
         }
 
         public string ObtenerDatos(string uri ) {

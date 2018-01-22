@@ -44,7 +44,7 @@ namespace Tips_Calculator.Logic
             }
         }
 
-        public  List<Rate> ObtenerRates()
+        public List<Rate> ObtenerRates()
         {
             List<Rate> rates = new List<Rate>();
             try
@@ -59,7 +59,7 @@ namespace Tips_Calculator.Logic
             return rates;
         }
 
-        public  List<Pedido> ObtenerPedidos()
+        public List<Pedido> ObtenerPedidos()
         {
             List<Pedido> pedidos = new List<Pedido>();
             try
@@ -76,7 +76,7 @@ namespace Tips_Calculator.Logic
 
         public PedidoDesglose CalcularPropinas(string cuenta, string moneda, List<Rate> rates, List<Pedido> pedidos)
         {
-            PedidoDesglose pedidoDesglose = new PedidoDesglose(){ Currency = moneda, Sku = cuenta };
+            PedidoDesglose pedidoDesglose = new PedidoDesglose() { Currency = moneda, Sku = cuenta };
             try
             {
                 var pedidosSelect = pedidos.FindAll(x => x.Sku == cuenta);
@@ -90,7 +90,7 @@ namespace Tips_Calculator.Logic
                     pedido.Currency = moneda;
                 }
                 decimal amountTotalDis = (from pedido in pedidosDifMon select pedido.Amount).Sum();
-                
+
                 pedidoDesglose.Amount = RedondearDecimales(amountTotalDis + amountTotalIg);
                 pedidoDesglose.Tip = RedondearDecimales(CalcularPropina(pedidoDesglose.Amount));
             }
@@ -106,22 +106,30 @@ namespace Tips_Calculator.Logic
         {
             List<Pedido> propinas = new List<Pedido>();
             Pedido propina = new Pedido();
-            foreach (var pedido in pedidos)
+            try
             {
-                propina = new Pedido()
+                foreach (var pedido in pedidos)
                 {
-                    Amount= pedido.Amount,
-                    Currency= pedido.Currency,
-                    Sku=pedido.Sku,
-                    Tip = RedondearDecimales(CalcularPropina(pedido.Amount))
-                };
-                propinas.Add(propina);
-                
+                    propina = new Pedido()
+                    {
+                        Amount = pedido.Amount,
+                        Currency = pedido.Currency,
+                        Sku = pedido.Sku,
+                        Tip = RedondearDecimales(CalcularPropina(pedido.Amount))
+                    };
+                    propinas.Add(propina);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                _Log.Error("Error al obtener las propinas: " + ex.Message);
+                throw ex;
             }
             return propinas;
         }
 
-        private static decimal CalcularRates(string moneda, List<Rate> rates, string pedido, List<string> monedasObtenidas )
+        private static decimal CalcularRates(string moneda, List<Rate> rates, string pedido, List<string> monedasObtenidas)
         {
             try
             {
@@ -146,7 +154,7 @@ namespace Tips_Calculator.Logic
                     }
                 }
                 return 0;
-            }  
+            }
             catch (Exception ex)
             {
                 _Log.Error(ex.Message);
@@ -154,7 +162,7 @@ namespace Tips_Calculator.Logic
                 throw ex;
             }
         }
-            private static decimal CalcularPropina(decimal amount)
+        private static decimal CalcularPropina(decimal amount)
         {
             try
             {
@@ -170,7 +178,16 @@ namespace Tips_Calculator.Logic
 
         private static decimal RedondearDecimales(decimal cantidad)
         {
-            return Math.Round(cantidad, 2, MidpointRounding.ToEven);
+            try
+            {
+                return Math.Round(cantidad, 2, MidpointRounding.ToEven);
+            }
+            catch (Exception ex)
+            {
+                _Log.Error("Error al redondear la cantidad pasada.");
+                _Log.Error(ex.Message);
+                throw ex;
+            }
         }
     }
 }

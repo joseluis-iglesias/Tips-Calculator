@@ -14,10 +14,10 @@ namespace UnitTestTipsCalculator
         IService service;
         private void Inicializar()
         {
-            operaciones = new  Operaciones();
+            operaciones = new Operaciones();
             logic = new Logic(operaciones);
             service = new Service();
-            
+
         }
 
         [TestMethod]
@@ -26,12 +26,15 @@ namespace UnitTestTipsCalculator
             Inicializar();
             try
             {
-                service.GetListaRates();
-                Assert.IsTrue(true);
+                var ratesJson = service.GetListaRates();
+                if (ratesJson != null && !ratesJson.Equals(""))
+                    Assert.IsTrue(true);
+                else
+                    Assert.Fail();
             }
             catch (Exception e)
             {
-                Assert.IsTrue(false, e.Message);
+                Assert.Fail(e.Message);
             }
         }
 
@@ -41,12 +44,15 @@ namespace UnitTestTipsCalculator
             Inicializar();
             try
             {
-                service.GetListaPedidos();
-                Assert.IsTrue(true);
+                var transaccionesJson = service.GetListaPedidos();
+                if (transaccionesJson != null && !transaccionesJson.Equals(""))
+                    Assert.IsTrue(true);
+                else
+                    Assert.Fail();
             }
             catch (Exception e)
             {
-                Assert.IsTrue(false, e.Message);
+                Assert.Fail(e.Message);
             }
         }
 
@@ -59,12 +65,15 @@ namespace UnitTestTipsCalculator
                 var pedidos = logic.ObtenerPedidos();
                 var rates = logic.ObtenerRates();
 
-                logic.CalcularPropinas(pedidos[0].Sku,"EUR",rates,pedidos);
-                Assert.IsTrue(true);
+                var propinas = logic.CalcularPropinas(pedidos[0].Sku, "EUR", rates, pedidos);
+                if (propinas != null)
+                    Assert.IsTrue(true);
+                else
+                    Assert.Fail();
             }
             catch (Exception e)
             {
-                Assert.IsTrue(false, e.Message);
+                Assert.Fail(e.Message);
             }
         }
     }
